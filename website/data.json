@@ -1,0 +1,14 @@
+{
+    "last":{
+        "datetime":"05-10-2020",
+        "incrementotamponi":65000,
+        "terapiaintensive":323
+    },
+    "historical":[
+        {
+            "datetime":"05-10-2020",
+            "incrementotamponi":65000,
+            "terapiaintensive":323
+        }
+    ]
+}
