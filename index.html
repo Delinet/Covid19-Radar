@@ -4,11 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v4.1.1">
+    <meta name="author" content="Delinet">
+    <meta name="generator" content="">
     <title>Covid-19 Radar</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/pricing/">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -30,22 +28,7 @@
     <!-- Vue3 CDN -->
     <script src="https://unpkg.com/vue@next"></script>
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+    
     <!-- Custom styles for this template -->
     <link href="./website/baseStyle.css" rel="stylesheet">
   </head>
@@ -54,9 +37,9 @@
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
             <h3 class="my-0 mr-md-auto font-weight-normal"><span class="m-2"><img src="./website/images/coronavirus64.png"></span>Covid-19 Radar</h3>
                 <nav class="my-2 my-md-0 mr-md-3">
-                    <a class="p-2 text-dark" href="#"></a>
+                    <a class="p-2 text-dark" href="#fonti">Fonti</a>
                 </nav>
-            <a class="btn btn-outline-primary" href="#">Comprami un caffè</a>
+            <!-- <a class="btn btn-outline-primary" href="#">Comprami un caffè</a> -->
         </div>
 
         
@@ -97,7 +80,7 @@
             </div>
             
             <div class="alert alert-primary shadow rounded" role="alert">
-                    Dati aggiornati al {{dailyDate}} ( Riferimento fonti nel footer della pagina )
+                    Dati aggiornati al {{dailyDate}} ( Riferimento fonti <a class="p-2 text-dark" href="#fonti">cliccare qui</a> )
             </div>
     
             <div class="card-deck mb-3 text-center">
@@ -154,10 +137,10 @@
 
             <div class="row">
                 <div class="col-6">
-                    <canvas id="myChart" width="400" height="400"></canvas>
+                    <canvas id="positiviTamponiChart" width="400" height="400"></canvas>
                 </div>
                 <div class="col-6">
-                    <canvas id="myChart2" width="400" height="400"></canvas>
+                    <canvas id="terapiaIntensivaChart" width="400" height="400"></canvas>
                 </div>
             </div>
             
@@ -182,7 +165,7 @@
                         <h5>Risorse</h5>
                         <p>Icons made by <a href="https://www.flaticon.com/authors/mangsaabguru" title="mangsaabguru">mangsaabguru</a>, <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a>, <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
                     </div>
-                    <div class="col-6 col-md">
+                    <div class="col-6 col-md" id="fonti">
                         <h5>Fonti</h5>
                         <ul class="list-unstyled text-small">
                         <li><a class="text-muted" href="http://www.salute.gov.it/portale/nuovocoronavirus/dettaglioContenutiNuovoCoronavirus.jsp?lingua=italiano&id=5351&area=nuovoCoronavirus&menu=vuoto&gclid=CjwKCAjwq_D7BRADEiwAVMDdHoQ4_c-hxcieW1dLcQLy6k4tIw5rt37Xvc2IHyj70HTYPIatDZ65SxoCx64QAvD_BwE">Ministero della Salute - Situazione in Italia Covid-19</a></li>

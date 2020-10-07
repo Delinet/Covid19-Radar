@@ -1,24 +1,7 @@
-//app-controller
+// Version:1.0.0
+// Developer: Delinet
 
-const latest = {
-    "data": "2020-10-06T17:00:00",
-    "stato": "ITA",
-    "ricoverati_con_sintomi": 3625,
-    "terapia_intensiva": 319,
-    "totale_ospedalizzati": 3944,
-    "isolamento_domiciliare": 56190,
-    "totale_positivi": 60134,
-    "variazione_totale_positivi": 1231,
-    "nuovi_positivi": 2677,
-    "dimessi_guariti": 234099,
-    "deceduti": 36030,
-    "casi_da_sospetto_diagnostico": 256986,
-    "casi_da_screening": 73277,
-    "totale_casi": 330263,
-    "tamponi": 11944088,
-    "casi_testati": 7216379,
-    "note": ""
-};
+//app-controller
 
 const totale = [
     {
@@ -4327,16 +4310,22 @@ const stringReverse = function(stringToReverse){
     return stringToArray.join(".");
 } // stringToReverse
 
+const positiviTamponiCalculator = function(index){
+    /* percentualePositiviTamponi */
+    let incrementoTamponi = totale[index].tamponi - totale[index-1]["tamponi"];
+    return ((totale[index].nuovi_positivi / incrementoTamponi)*100).toFixed(2);
+} // positiviTamponiCalculator
+
 const prepareData = function(){
     /* dailyDate */
-    dataToBind["dailyDate"] = stringReverse(latest.data.substring(0,10));
+    dataToBind["dailyDate"] = stringReverse(totale[totale.length-1].data.substring(0,10));
 
     /* incrementoPositivi */
-    dataToBind["incrementoPositivi"] = "+" + latest.nuovi_positivi;
+    dataToBind["incrementoPositivi"] = "+" + totale[totale.length-1].nuovi_positivi;
 
     /* terapiaIntensiva */
-    dataToBind["terapiaIntensiva"] = latest.terapia_intensiva;
-    if (latest.terapia_intensiva > totale[totale.length-2]["terapia_intensiva"]){
+    dataToBind["terapiaIntensiva"] = totale[totale.length-1].terapia_intensiva;
+    if (totale[totale.length-1].terapia_intensiva > totale[totale.length-2]["terapia_intensiva"]){
         dataToBind["iconTerapiaIntensiva"] = "arrow-up";
     }
     else {
@@ -4344,65 +4333,53 @@ const prepareData = function(){
     }
 
     /* percentualePositiviTamponi */
-    let incrementoTamponi = latest.tamponi - totale[totale.length-2]["tamponi"];
-    console.log(incrementoTamponi)
-    dataToBind["percentualePositiviTamponi"] = ((latest.nuovi_positivi / incrementoTamponi)*100).toFixed(2) + "%";
+    // let incrementoTamponi = totale[totale.length-1].tamponi - totale[totale.length-2]["tamponi"];
+    // console.log(incrementoTamponi)
+    // dataToBind["percentualePositiviTamponi"] = ((totale[totale.length-1].nuovi_positivi / incrementoTamponi)*100).toFixed(2) + "%";
+    dataToBind["percentualePositiviTamponi"] = positiviTamponiCalculator(totale.length-1);
+
+    dataForChart();
 
 } // prepareData
 
-// fetch data source
-const datasourceURI = "../dataSourceLatest.json";
-// fetch(datasourceURI,{mode:'no-cors'})
-//     .then(response => {
-//         console.log(response);
-//     });
+/******************************** Chart Rendering ************************************/
 
-let App={};
-const init = function(){
-    //prepareData();
-    App = Vue.createApp({
-        data() {
-            return {
-                // dailyDate:dataToBind.dailyDate,
-                // incrementoPositivi:dataToBind.incrementoPositivi,
-                // terapiaIntensiva:dataToBind.terapiaIntensiva,
-                // iconTerapiaIntensiva:dataToBind.iconTerapiaIntensiva,
-                // percentualePositiviTamponi:dataToBind.percentualePositiviTamponi
-            }
-        }
-    }); // App Object
-};// init
+const dataForChart = function() {
+    /* Chart: Terapia Intensiva */
+    let arrayData = [];
+    let arrayLabel = [];
+    for(let i=totale.length-7; i<totale.length; i++){
+        arrayData.push(totale[i].terapia_intensiva);
+        arrayLabel.push(stringReverse(totale[i].data.substring(0,10)));
+        
+    } 
+    dataToBind["terapiaIntensivaData"] = arrayData;
+    dataToBind["terapiaIntensivaLabel"] = arrayLabel;
 
-init();
+    /* Chart: Positivi su Tamponi */
+    arrayData = [];
+    for(let i=totale.length-7; i<totale.length; i++){
+        arrayData.push(positiviTamponiCalculator(i));
+    } 
+    dataToBind["positiviTamponiData"] = arrayData;
+    dataToBind["positiviTamponiLabel"] = arrayLabel;
+}; // dataForChart
 
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
+
+const renderLineChart = function(){
+    var ctx = document.getElementById('terapiaIntensivaChart');
+    data = {
+        labels: dataToBind.terapiaIntensivaLabel,
+        datasets:[{
+            label: 'Terapia Intensiva',
+            data: dataToBind.terapiaIntensivaData,
+            borderColor:'rgba(204, 209, 255, 1)',
+            borderWidth:5,
+            pointRadius:3,
+            fill:false
         }]
-    },
-    options: {
+    };
+    options = {
         scales: {
             yAxes: [{
                 ticks: {
@@ -4411,6 +4388,71 @@ var myChart = new Chart(ctx, {
             }]
         }
     }
-});
+    var lineChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: options
+    });
+
+    var ctx = document.getElementById('positiviTamponiChart');
+    data = {
+        labels: dataToBind.positiviTamponiLabel,
+        datasets:[{
+            label: 'Positivi su Tamponi',
+            data: dataToBind.positiviTamponiData,
+            borderColor:'rgba(204, 209, 255, 1)',
+            borderWidth:5,
+            pointRadius:3,
+            fill:false
+        }]
+    };
+    options = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+    var lineChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: options
+    });
+}; // renderLineChart
+
+
+/*************************************************************************************/
+
+// fetch data source
+const datasourceURI = "../dataSource.json";
+// fetch(datasourceURI,{mode:'no-cors'})
+//     .then(response => {
+//         console.log(response);
+//     });
+
+let App={};
+const init = function(){
+    prepareData();
+    App = Vue.createApp({
+        data() {
+            return {
+                dailyDate:dataToBind.dailyDate,
+                incrementoPositivi:dataToBind.incrementoPositivi,
+                terapiaIntensiva:dataToBind.terapiaIntensiva,
+                iconTerapiaIntensiva:dataToBind.iconTerapiaIntensiva,
+                percentualePositiviTamponi:dataToBind.percentualePositiviTamponi
+            }
+        },
+        mounted() {
+            renderLineChart();
+        }
+    }); // App Object
+};// init
+
+init();
+
+
 
 
