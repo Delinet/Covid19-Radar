@@ -5,7 +5,7 @@
 
 console.log(":/> app-controller");
 
-const totale;
+let totale;
 const dataToBind = {};
 
 const stringReverse = function(stringToReverse){
@@ -152,7 +152,8 @@ const init = function(){
 
 // fetch data source
 const datasourceURI = "../dataSource.json";
-fetch(datasourceURI,{mode:'no-cors'})
+console.log("FETCH");
+fetch(datasourceURI,{})
     .then(response => {
         console.log(response);
         totale = response;
