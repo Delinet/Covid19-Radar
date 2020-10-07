@@ -14,19 +14,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <!-- <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="manifest" href="/docs/4.5/assets/img/favicons/manifest.json">
     <link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
     <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
     <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
-    <meta name="theme-color" content="#563d7c">
+    <meta name="theme-color" content="#563d7c"> -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==" crossorigin="anonymous"></script>
-
 
     <!-- Vue3 CDN -->
     <script src="https://unpkg.com/vue@next"></script>
@@ -48,12 +47,12 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="baseStyle.css" rel="stylesheet">
+    <link href="./website/baseStyle.css" rel="stylesheet">
   </head>
     <body>
-    
+    <div id="app"> <!-- App -->
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-            <h3 class="my-0 mr-md-auto font-weight-normal"><span class="m-2"><img src="images/coronavirus64.png"></span>Covid-19 Radar</h3>
+            <h3 class="my-0 mr-md-auto font-weight-normal"><span class="m-2"><img src="./website/images/coronavirus64.png"></span>Covid-19 Radar</h3>
                 <nav class="my-2 my-md-0 mr-md-3">
                     <a class="p-2 text-dark" href="#"></a>
                 </nav>
@@ -72,7 +71,7 @@
                 <div class="row">
                     <div class="col p-3">
                         <div class="media">
-                            <img src="images/medical-mask64.png" class="mr-3" alt="...">
+                            <img src="./website/images/medical-mask64.png" class="mr-3" alt="...">
                             <div class="media-body">
                               <h5 class="mt-0">Usa sempre la mascherina</h5>
                             </div>
@@ -80,7 +79,7 @@
                     </div>
                     <div class="col p-3">
                         <div class="media">
-                            <img src="images/disinfectant64.png" class="mr-3" alt="...">
+                            <img src="./website/images/disinfectant64.png" class="mr-3" alt="...">
                             <div class="media-body">
                               <h5 class="mt-0">Lava e disinfetta spesso le mani</h5>
                             </div>
@@ -88,7 +87,7 @@
                     </div>
                     <div class="col p-3">
                         <div class="media">
-                            <img src="images/social-distancing64.png" class="mr-3" alt="...">
+                            <img src="./website/images/social-distancing64.png" class="mr-3" alt="...">
                             <div class="media-body">
                               <h5 class="mt-0">Rispetta il distanziamento sociale</h5>
                             </div>
@@ -96,7 +95,11 @@
                     </div>
                 </div>
             </div>
-
+            
+            <div class="alert alert-primary shadow rounded" role="alert">
+                    Dati aggiornati al {{dailyDate}} ( Riferimento fonti nel footer della pagina )
+            </div>
+    
             <div class="card-deck mb-3 text-center">
                 <!-- <div class="card mb-4 shadow-sm">
                     <div class="card-header">
@@ -115,36 +118,36 @@
                 </div> -->
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Totale Tamponi</h4>
+                        <h4 class="my-0 font-weight-normal">Incremento Positivi</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title">65000</h1>
+                        <h1 class="card-title pricing-card-title">{{incrementoPositivi}}</h1>
                     </div>
                 </div>
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Positivi / Tamponi</h4>
+                        <h4 class="my-0 font-weight-normal">Terapia Intensiva</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title">2.5%</h1>
+                        <h1 class="card-title pricing-card-title">{{terapiaIntensiva}}</h1>
                     </div>
                 </div>
             </div>
             <div class="card-deck mb-3 text-center">
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Rt</h4>
+                        <h4 class="my-0 font-weight-normal">Positivi / Tamponi</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title">1.0</h1>
+                        <h1 class="card-title pricing-card-title">{{percentualePositiviTamponi}}</h1>
                     </div>
                 </div>
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">R0</h4>
+                        <h4 class="my-0 font-weight-normal">Indice Rt</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title">1.0</h1>
+                        <h1 class="card-title pricing-card-title">1.01 <small class="text-muted font-weight-lighter">al 23.09</small></h1>
                     </div>
                 </div>
             </div>
@@ -158,83 +161,6 @@
                 </div>
             </div>
             
-<script>
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
-var ctx2 = document.getElementById('myChart2');
-var myChart = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
-</script>
-
             <footer class="pt-4 my-md-5 pt-md-5 border-top">
                 <div class="row">
                     <div class="col-12 col-md">
@@ -262,14 +188,18 @@ var myChart = new Chart(ctx2, {
                         <li><a class="text-muted" href="http://www.salute.gov.it/portale/nuovocoronavirus/dettaglioContenutiNuovoCoronavirus.jsp?lingua=italiano&id=5351&area=nuovoCoronavirus&menu=vuoto&gclid=CjwKCAjwq_D7BRADEiwAVMDdHoQ4_c-hxcieW1dLcQLy6k4tIw5rt37Xvc2IHyj70HTYPIatDZ65SxoCx64QAvD_BwE">Ministero della Salute - Situazione in Italia Covid-19</a></li>
                         <li><a class="text-muted" href="https://www.iss.it/primo-piano/-/asset_publisher/o4oGR9qmvUz9/content/id/5477037">ISS - FAQ sul calcolo indice Rt</a></li>
                         <li><a class="text-muted" href="http://www.protezionecivile.gov.it/attivita-rischi/rischio-sanitario/emergenze/coronavirus">Protezione Civile - Emergenza Coronavirus</a></li>
+                        <li><a class="text-muted" href="https://github.com/pcm-dpc/COVID-19">Protezione Civile - Covid-19 Open Data</a></li>
                         </ul>
                     </div>
                 </div>
             </footer>
-            
-            <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/mangsaabguru" title="mangsaabguru">mangsaabguru</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-            <div>Icons made by <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></div>
-            <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></div> -->
+
         </div>
+    </div> <!-- App -->
+
+    <!-- Vue: import controllers -->
+    <script src="./website/controllers/app-controller.js"></script>
+    <script src="./website/app.js"></script>
+
     </body>
 </html>

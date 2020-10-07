@@ -4359,16 +4359,15 @@ const datasourceURI = "../dataSourceLatest.json";
 
 let App={};
 const init = function(){
-    prepareData();
-    console.log(dataToBind);
+    //prepareData();
     App = Vue.createApp({
         data() {
             return {
-                dailyDate:dataToBind.dailyDate,
-                incrementoPositivi:dataToBind.incrementoPositivi,
-                terapiaIntensiva:dataToBind.terapiaIntensiva,
-                iconTerapiaIntensiva:dataToBind.iconTerapiaIntensiva,
-                percentualePositiviTamponi:dataToBind.percentualePositiviTamponi
+                // dailyDate:dataToBind.dailyDate,
+                // incrementoPositivi:dataToBind.incrementoPositivi,
+                // terapiaIntensiva:dataToBind.terapiaIntensiva,
+                // iconTerapiaIntensiva:dataToBind.iconTerapiaIntensiva,
+                // percentualePositiviTamponi:dataToBind.percentualePositiviTamponi
             }
         }
     }); // App Object
