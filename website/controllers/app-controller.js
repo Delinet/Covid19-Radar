@@ -156,8 +156,9 @@ const init = function(){
 const datasourceURI = "./website/dataSource.json";
 console.log("FETCH");
 fetch(datasourceURI,{})
-    .then(response => {
-        totale = response.json();
+    .then(response => response.json())
+    .then(data => {
+        totale = data;
         console.log("totale:" + totale);
         init();
     });
