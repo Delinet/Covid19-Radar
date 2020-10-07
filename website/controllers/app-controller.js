@@ -4426,14 +4426,7 @@ const renderLineChart = function(){
 
 /*************************************************************************************/
 
-// fetch data source
-const datasourceURI = "../dataSource.json";
-fetch(datasourceURI,{mode:'no-cors'})
-    .then(response => {
-        console.log(response);
-        totale = response;
-        console.log(totale);
-    });
+
 
 let App={};
 const init = function(){
@@ -4454,7 +4447,15 @@ const init = function(){
     }); // App Object
 };// init
 
-init();
+// fetch data source
+const datasourceURI = "../dataSource.json";
+fetch(datasourceURI,{mode:'no-cors'})
+    .then(response => {
+        console.log(response);
+        totale = response;
+        console.log(totale);
+        init();
+    });
 
 
 
