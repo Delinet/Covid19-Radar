@@ -158,7 +158,7 @@ console.log("FETCH");
 fetch(datasourceURI,{})
     .then(response => {
         totale = response.json();
-        console.log(totale);
+        console.log("totale:" + totale);
         init();
     });
 
