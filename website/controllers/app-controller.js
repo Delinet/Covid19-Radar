@@ -4432,6 +4432,7 @@ fetch(datasourceURI,{mode:'no-cors'})
     .then(response => {
         console.log(response);
         totale = response;
+        console.log(totale);
     });
 
 let App={};
