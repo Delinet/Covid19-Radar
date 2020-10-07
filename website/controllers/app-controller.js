@@ -151,7 +151,7 @@ const init = function(){
 };// init
 
 // fetch data source
-const datasourceURI = "../dataSource.json";
+const datasourceURI = "./dataSource.json";
 console.log("FETCH");
 fetch(datasourceURI,{})
     .then(response => {
