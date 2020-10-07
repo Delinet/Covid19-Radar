@@ -157,7 +157,6 @@ const datasourceURI = "./website/dataSource.json";
 console.log("FETCH");
 fetch(datasourceURI,{})
     .then(response => {
-        console.log(response.json());
         totale = response.json();
         console.log(totale);
         init();
