@@ -151,7 +151,7 @@ const init = function(){
 };// init
 
 // fetch data source
-const datasourceURI = "./Covid19-Radar/dataSource.json";
+const datasourceURI = "./Covid19-Radar/website/dataSource.json";
 console.log("FETCH");
 fetch(datasourceURI,{})
     .then(response => {
