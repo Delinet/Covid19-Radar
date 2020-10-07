@@ -148,6 +148,8 @@ const init = function(){
             renderLineChart();
         }
     }); // App Object
+
+    App.mount('#app');
 };// init
 
 // fetch data source
