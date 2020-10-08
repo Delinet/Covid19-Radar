@@ -40,7 +40,7 @@ const prepareData = function(){
     // let incrementoTamponi = totale[totale.length-1].tamponi - totale[totale.length-2]["tamponi"];
     // console.log(incrementoTamponi)
     // dataToBind["percentualePositiviTamponi"] = ((totale[totale.length-1].nuovi_positivi / incrementoTamponi)*100).toFixed(2) + "%";
-    dataToBind["percentualePositiviTamponi"] = positiviTamponiCalculator(totale.length-1);
+    dataToBind["percentualePositiviTamponi"] = positiviTamponiCalculator(totale.length-1) +"%";
 
     dataForChart();
 
